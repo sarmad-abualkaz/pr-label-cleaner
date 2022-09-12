@@ -1,0 +1,21 @@
+name: Publish Artifacts
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-test:
+    uses: ./.github/workflows/build-and-test.yaml
+    with:
+      PROJECT: pr-label-cleaner
+    secrets: inherit
+
+  publish-image:
+    needs: build-and-test
+    uses: ./.github/workflows/publish-image.yaml
+    with:
+      PROJECT: pr-label-cleaner
+      DOCKERREGISTRY: abualks
+    secrets: inherit
