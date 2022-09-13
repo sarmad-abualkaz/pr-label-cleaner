@@ -19,7 +19,7 @@ RUN CGO_ENABLExD=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o pr-labe
 
 # Use distroless as minimal base image to package the manager binary
 # Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM golang:1.18.4
+FROM gcr.io/distroless/static-debian11
 WORKDIR /
 COPY --from=builder /workspace/pr-label-cleaner .
 USER nonroot:nonroot
